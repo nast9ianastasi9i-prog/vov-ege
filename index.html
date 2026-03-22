@@ -7,500 +7,198 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:     #F7F1E8;
-  --bg2:    #EDE0CE;
-  --panel:  #E0CEBA;
-  --acc1:   #B07B6A;
-  --acc2:   #8B9E8B;
-  --acc3:   #D4A89A;
-  --gold:   #C9A98A;
-  --dark:   #3D2B1F;
-  --dbkg:   #2A1C14;
-  --mid:    #6B4E3D;
-  --lite:   #A08070;
-  --white:  #FFFFFF;
-  --div:    #DCCFBF;
-  --red-d:  #8B3A3A;
-  --grn-d:  #4A6B4A;
-  --r:      6px;
+  --bg:    #F7F1E8;
+  --bg2:   #EDE0CE;
+  --panel: #E0CEBA;
+  --acc1:  #B07B6A;
+  --acc2:  #8B9E8B;
+  --acc3:  #D4A89A;
+  --gold:  #C9A98A;
+  --dark:  #3D2B1F;
+  --dbkg:  #2A1C14;
+  --mid:   #6B4E3D;
+  --lite:  #A08070;
+  --wht:   #FFFFFF;
+  --div:   #DCCFBF;
+  --red:   #8B3A3A;
+  --grn:   #4A6B4A;
+  --r:     6px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--dark);font-family:'Lora',Georgia,serif;font-size:15px;line-height:1.65}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--acc1);border-radius:3px}
 
-body {
-  background: var(--bg);
-  color: var(--dark);
-  font-family: 'Lora', Georgia, serif;
-  font-size: 15px;
-  line-height: 1.6;
-}
+/* COVER */
+.cover{background:var(--dbkg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:60px 40px;text-align:center}
+.cover::before{content:'';position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(176,123,106,.18) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.cover::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(139,158,139,.12) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none}
+.cover-star{font-size:52px;color:var(--gold);margin-bottom:18px;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(.96)}}
+.cover-badge{background:var(--acc1);color:#fff;font-family:'Lora',serif;font-size:11px;letter-spacing:3px;padding:6px 22px;border-radius:20px;text-transform:uppercase;margin-bottom:26px;display:inline-block}
+.cover h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,62px);color:#fff;line-height:1.15;font-weight:700;letter-spacing:2px}
+.cover h1 span{color:var(--acc3);display:block}
+.cover-years{margin:26px 0;display:flex;align-items:center;gap:18px;justify-content:center}
+.cover-years .ln{flex:1;height:1px;background:var(--acc1);max-width:90px}
+.cover-years span{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);letter-spacing:6px}
+.cover-sub{font-family:'Lora',serif;font-style:italic;font-size:15px;color:var(--acc3);margin-bottom:44px}
+.cover-toc{background:rgba(61,43,31,.7);border:1px solid rgba(176,123,106,.3);border-left:3px solid var(--acc2);border-radius:var(--r);padding:22px 30px;max-width:500px;width:100%;text-align:left}
+.cover-toc h3{font-family:'Lora',serif;font-size:11px;letter-spacing:3px;color:var(--acc2);text-transform:uppercase;margin-bottom:12px}
+.cover-toc a{display:flex;align-items:center;gap:10px;color:#C8A890;text-decoration:none;font-size:13px;padding:5px 0;transition:color .2s,padding-left .2s;border-bottom:1px solid rgba(220,207,191,.1)}
+.cover-toc a:last-child{border-bottom:none}
+.cover-toc a:hover{color:var(--acc3);padding-left:6px}
+.cover-toc .num{width:20px;height:20px;background:var(--acc1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
-::-webkit-scrollbar-thumb { background: var(--acc1); border-radius: 3px; }
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--dbkg);border-bottom:2px solid var(--acc1);display:flex;align-items:center;overflow-x:auto;padding:0 14px}
+.nav-brand{color:var(--gold);font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:1px;padding:13px 18px 13px 6px;border-right:1px solid rgba(220,207,191,.15);margin-right:6px;white-space:nowrap;flex-shrink:0}
+nav a{color:var(--lite);text-decoration:none;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;padding:13px 13px;white-space:nowrap;transition:color .2s,border-bottom .2s;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Lora',serif}
+nav a:hover,nav a.active{color:var(--acc3);border-bottom-color:var(--acc3)}
 
-/* ── COVER ── */
-.cover {
-  background: var(--dbkg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding: 60px 40px;
-}
-.cover::before {
-  content: '';
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(176,123,106,0.18) 0%, transparent 70%);
-  top: -100px; right: -100px;
-}
-.cover::after {
-  content: '';
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139,158,139,0.12) 0%, transparent 70%);
-  bottom: -80px; left: -80px;
-}
-.cover-star {
-  font-size: 52px;
-  color: var(--gold);
-  margin-bottom: 20px;
-  animation: pulse 3s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.7;transform:scale(0.95)} }
+/* MAIN */
+main{max-width:1080px;margin:0 auto;padding:0 20px}
 
-.cover-badge {
-  background: var(--acc1);
-  color: var(--white);
-  font-family: 'Lora', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  padding: 6px 22px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-}
-.cover h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 6vw, 64px);
-  color: var(--white);
-  text-align: center;
-  line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-.cover h1 span { color: var(--acc3); display: block; }
-.cover-years {
-  margin: 28px 0;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.cover-years .line { flex: 1; height: 1px; background: var(--acc1); max-width: 100px; }
-.cover-years span {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: var(--gold);
-  letter-spacing: 6px;
-}
-.cover-sub {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: var(--acc3);
-  margin-bottom: 50px;
-}
-.cover-toc {
-  background: rgba(61,43,31,0.7);
-  border: 1px solid rgba(176,123,106,0.3);
-  border-left: 3px solid var(--acc2);
-  border-radius: var(--r);
-  padding: 24px 32px;
-  max-width: 520px;
-  width: 100%;
-}
-.cover-toc h3 {
-  font-family: 'Lora', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--acc2);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.cover-toc a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #C8A890;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 5px 0;
-  transition: color .2s, padding-left .2s;
-  border-bottom: 1px solid rgba(220,207,191,0.1);
-}
-.cover-toc a:last-child { border-bottom: none; }
-.cover-toc a:hover { color: var(--acc3); padding-left: 8px; }
-.cover-toc a .num {
-  width: 22px; height: 22px;
-  background: var(--acc1);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 600; color: white; flex-shrink: 0;
-}
+/* SECTION */
+section{padding:54px 0 36px;border-bottom:1px solid var(--div)}
 
-/* ── NAV ── */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--dbkg);
-  border-bottom: 2px solid var(--acc1);
-  display: flex;
-  align-items: center;
-  gap: 0;
-  overflow-x: auto;
-  padding: 0 16px;
-}
-nav a {
-  color: var(--lite);
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 14px 16px;
-  white-space: nowrap;
-  transition: color .2s, border-bottom .2s;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  font-family: 'Lora', serif;
-}
-nav a:hover, nav a.active { color: var(--acc3); border-bottom-color: var(--acc3); }
-.nav-brand {
-  color: var(--gold);
-  font-family: 'Playfair Display', serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 14px 20px 14px 8px;
-  border-right: 1px solid rgba(220,207,191,0.15);
-  margin-right: 8px;
-  white-space: nowrap;
-}
+.s-head{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.s-icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.s-head h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;letter-spacing:.8px}
+.s-head p{font-size:13px;color:var(--lite);margin-top:2px;font-style:italic}
 
-/* ── MAIN LAYOUT ── */
-main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+/* CALLOUT */
+.callout{background:var(--bg2);border-left:4px solid var(--acc3);border-radius:0 var(--r) var(--r) 0;padding:13px 18px;margin-bottom:24px;font-style:italic;font-size:13.5px;color:var(--mid);line-height:1.6}
 
-/* ── SECTION ── */
-section {
-  padding: 60px 0 40px;
-  border-bottom: 1px solid var(--div);
-  animation: fadeUp .5s ease both;
-}
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+/* DATE ROWS */
+.dates{display:flex;flex-direction:column;gap:5px}
+.dr{display:flex;align-items:flex-start;gap:12px;padding:9px 13px;border-radius:var(--r);background:var(--wht);border:1px solid var(--div);transition:transform .15s,box-shadow .15s}
+.dr:hover{transform:translateX(4px);box-shadow:2px 2px 10px rgba(61,43,31,.08)}
+.dr:nth-child(even){background:var(--bg2)}
+.dr.highlight{background:rgba(139,158,139,.12);border-color:var(--acc2)}
+.dbadge{background:var(--acc1);color:#fff;font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:4px;white-space:nowrap;min-width:136px;text-align:center;font-family:'Lora',serif;flex-shrink:0}
+.dbadge.green{background:var(--acc2)}
+.dtext{font-size:13.5px;color:var(--dark);padding-top:3px;line-height:1.55}
 
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-.section-icon {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-}
-.section-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-.section-header p {
-  font-size: 13px;
-  color: var(--lite);
-  margin-top: 2px;
-  font-style: italic;
-}
+/* PERIODS */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pcard{border-radius:var(--r);overflow:hidden;border:1px solid var(--div);background:var(--wht)}
+.phead{padding:13px 15px;color:#fff;font-family:'Playfair Display',serif;font-size:13px;font-weight:700}
+.phead small{display:block;font-family:'Lora',serif;font-size:11px;font-weight:400;opacity:.85;margin-top:2px}
+.pbody{padding:13px 15px;font-size:13px;color:var(--mid);line-height:1.62}
 
-/* ── CALLOUT ── */
-.callout {
-  background: var(--bg2);
-  border-left: 4px solid var(--acc3);
-  border-radius: 0 var(--r) var(--r) 0;
-  padding: 14px 20px;
-  margin-bottom: 28px;
-  font-style: italic;
-  font-size: 14px;
-  color: var(--mid);
-}
+/* BATTLES */
+.bgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.bcard{background:var(--wht);border:1px solid var(--div);border-radius:var(--r);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(61,43,31,.1)}
+.bcard.full{grid-column:1/-1}
+.bhead{padding:11px 15px;color:#fff;font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px}
+.bhead small{font-family:'Lora',serif;font-size:11.5px;font-weight:400;font-style:italic;opacity:.9}
+.bbody{padding:13px 15px;font-size:13px}
+.bcmd{color:var(--mid);font-style:italic;margin-bottom:7px;font-size:12.5px}
+.bdiv{height:1px;background:var(--div);margin:7px 0}
+.bres{color:var(--dark);font-weight:600;margin-bottom:5px;font-size:13.5px}
+.bkey{color:var(--lite);font-size:12.5px;line-height:1.55}
 
-/* ── DATE ROWS ── */
-.dates-list { display: flex; flex-direction: column; gap: 6px; }
-.date-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 10px 14px;
-  border-radius: var(--r);
-  background: var(--white);
-  border: 1px solid var(--div);
-  transition: transform .15s, box-shadow .15s;
-}
-.date-row:hover { transform: translateX(4px); box-shadow: 2px 2px 12px rgba(61,43,31,0.08); }
-.date-row:nth-child(even) { background: var(--bg2); }
-.date-badge {
-  background: var(--acc1);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  min-width: 130px;
-  text-align: center;
-  font-family: 'Lora', serif;
-}
-.date-text {
-  font-size: 14px;
-  color: var(--dark);
-  padding-top: 3px;
-}
+/* MINI TITLE */
+.mt{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--dark);margin:24px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--div);display:flex;align-items:center;gap:8px}
+.mt::before{content:'';display:block;width:4px;height:15px;border-radius:2px;background:var(--acc2);flex-shrink:0}
 
-/* ── PERIODS ── */
-.periods-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
-.period-card {
-  border-radius: var(--r);
-  overflow: hidden;
-  border: 1px solid var(--div);
-  background: var(--white);
-}
-.period-head {
-  padding: 14px 16px;
-  color: var(--white);
-  font-family: 'Playfair Display', serif;
-  font-size: 13px;
-  font-weight: 700;
-}
-.period-head small { display: block; font-family: 'Lora', serif; font-size: 11px; font-weight: 400; opacity: .85; margin-top: 3px; }
-.period-body { padding: 14px 16px; font-size: 13px; color: var(--mid); line-height: 1.6; }
+/* FRONTS */
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.frow{display:flex;background:var(--wht);border:1px solid var(--div);border-radius:var(--r);overflow:hidden;transition:transform .15s}
+.frow:hover{transform:translateX(3px)}
+.frow:nth-child(4n+3),.frow:nth-child(4n+4){background:var(--bg2)}
+.facc{width:4px;flex-shrink:0}
+.fbody{padding:9px 12px;flex:1}
+.fname{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;color:var(--dark)}
+.fcmd{font-size:12px;font-style:italic;color:var(--mid);margin:2px 0}
+.fops{font-size:11.5px;color:var(--lite)}
 
-/* ── BATTLE CARDS ── */
-.battles-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
-.battle-card {
-  background: var(--white);
-  border: 1px solid var(--div);
-  border-radius: var(--r);
-  overflow: hidden;
-  transition: transform .2s, box-shadow .2s;
-}
-.battle-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(61,43,31,0.1); }
-.battle-card.full { grid-column: 1/-1; }
-.battle-head {
-  padding: 12px 16px;
-  color: var(--white);
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.battle-head small { font-family: 'Lora', serif; font-size: 12px; font-weight: 400; font-style: italic; opacity: .9; }
-.battle-body { padding: 14px 16px; font-size: 13px; }
-.battle-cmd { color: var(--mid); font-style: italic; margin-bottom: 8px; font-size: 12.5px; }
-.battle-divider { height: 1px; background: var(--div); margin: 8px 0; }
-.battle-result { color: var(--dark); font-weight: 600; margin-bottom: 6px; font-size: 13.5px; }
-.battle-key { color: var(--lite); font-size: 12.5px; }
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ecard{background:var(--wht);border:1px solid var(--div);border-radius:var(--r);overflow:hidden}
+.ehead{padding:9px 13px;color:#fff;font-family:'Playfair Display',serif;font-size:13px;font-weight:700}
+.ebody{padding:9px 13px;font-size:12.5px}
+.ecmd{color:var(--mid);font-style:italic;margin-bottom:4px;font-size:12px}
+.eops{color:var(--lite)}
 
-/* ── FRONTS ── */
-.fronts-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
-.front-row {
-  display: flex;
-  background: var(--white);
-  border: 1px solid var(--div);
-  border-radius: var(--r);
-  overflow: hidden;
-  transition: transform .15s;
-}
-.front-row:hover { transform: translateX(3px); }
-.front-row:nth-child(4n+3), .front-row:nth-child(4n+4) { background: var(--bg2); }
-.front-accent { width: 4px; flex-shrink: 0; }
-.front-body { padding: 10px 14px; flex: 1; }
-.front-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; color: var(--dark); }
-.front-cmd { font-size: 12px; font-style: italic; color: var(--mid); margin: 2px 0; }
-.front-ops { font-size: 12px; color: var(--lite); }
+/* COMMANDERS */
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.ccard{background:var(--wht);border:1px solid var(--div);border-radius:var(--r);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.ccard:hover{box-shadow:0 6px 18px rgba(61,43,31,.1);transform:translateY(-2px)}
+.chead{padding:10px 15px}
+.chead h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff}
+.chead small{font-family:'Lora',serif;font-style:italic;font-size:12px;color:rgba(255,255,255,.8);display:block}
+.cbody{padding:12px 15px;font-size:13px;color:var(--mid);line-height:1.62}
 
-.enemy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
-.enemy-card {
-  background: var(--white);
-  border: 1px solid var(--div);
-  border-radius: var(--r);
-  overflow: hidden;
-}
-.enemy-head { padding: 10px 14px; color: var(--white); font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; }
-.enemy-body { padding: 10px 14px; font-size: 12.5px; }
-.enemy-cmd { color: var(--mid); font-style: italic; margin-bottom: 5px; font-size: 12px; }
-.enemy-ops { color: var(--lite); }
+.ogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.ocard{background:var(--bg2);border-radius:var(--r);padding:13px;border-left:3px solid var(--mid)}
+.oname{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:4px}
+.obio{font-size:12.5px;color:var(--mid);line-height:1.55}
 
-/* ── COMMANDERS ── */
-.commanders-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
-.cmd-card {
-  background: var(--white);
-  border: 1px solid var(--div);
-  border-radius: var(--r);
-  overflow: hidden;
-  transition: box-shadow .2s, transform .2s;
-}
-.cmd-card:hover { box-shadow: 0 6px 20px rgba(61,43,31,0.1); transform: translateY(-2px); }
-.cmd-head { padding: 11px 16px; display: flex; align-items: center; gap: 10px; }
-.cmd-head h3 { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--white); }
-.cmd-head small { font-family: 'Lora', serif; font-style: italic; font-size: 12px; color: rgba(255,255,255,0.8); display: block; }
-.cmd-body { padding: 13px 16px; font-size: 13.5px; color: var(--mid); line-height: 1.65; }
+/* TYLA */
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.tcard{background:var(--wht);border:1px solid var(--div);border-radius:var(--r);padding:15px;border-left:4px solid var(--acc1)}
+.ttitle{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--dark);margin-bottom:7px}
+.ttext{font-size:13px;color:var(--mid);line-height:1.6}
 
-.others-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 6px; }
-.other-card {
-  background: var(--bg2);
-  border-radius: var(--r);
-  padding: 14px;
-  border-left: 3px solid var(--mid);
-}
-.other-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
-.other-bio { font-size: 12.5px; color: var(--mid); line-height: 1.55; }
+/* VICTORY */
+.rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.rcard{background:var(--wht);border:1px solid var(--div);border-radius:var(--r);padding:15px;border-left:4px solid var(--acc2);transition:transform .15s}
+.rcard:hover{transform:translateX(3px)}
+.rtitle{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.rtext{font-size:13px;color:var(--mid);line-height:1.6}
 
-/* ── VICTORY ── */
-.reasons-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
-.reason-card {
-  background: var(--white);
-  border: 1px solid var(--div);
-  border-radius: var(--r);
-  padding: 16px;
-  border-left: 4px solid var(--acc2);
-  transition: transform .15s;
-}
-.reason-card:hover { transform: translateX(3px); }
-.reason-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
-.reason-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:26px 0 18px}
+.stat{background:var(--dbkg);border-radius:var(--r);padding:16px 10px;text-align:center}
+.snum{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold)}
+.slbl{font-size:11.5px;color:var(--lite);margin-top:4px;line-height:1.4}
 
-.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 28px 0 20px; }
-.stat-card {
-  background: var(--dbkg);
-  border-radius: var(--r);
-  padding: 18px 12px;
-  text-align: center;
-}
-.stat-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--gold); }
-.stat-lbl { font-size: 12px; color: var(--lite); margin-top: 4px; line-height: 1.4; }
+ul.res{list-style:none;display:flex;flex-direction:column;gap:6px}
+ul.res li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px}
+ul.res li::before{content:'★';color:var(--acc2);font-size:11px;flex-shrink:0;margin-top:3px}
 
-ul.results { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-ul.results li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13.5px;
-  color: var(--dark);
-}
-ul.results li::before {
-  content: '★';
-  color: var(--acc2);
-  font-size: 12px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+/* CHEATSHEET */
+.otable{width:100%;border-collapse:collapse;border-radius:var(--r);overflow:hidden;font-size:12.5px}
+.otable thead tr{background:var(--panel)}
+.otable th{padding:9px 11px;text-align:left;font-family:'Lora',serif;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--mid);font-weight:600}
+.otable td{padding:8px 11px;border-bottom:1px solid var(--div);vertical-align:top}
+.otable tr:nth-child(even) td{background:var(--bg2)}
+.otable tr:hover td{background:rgba(176,123,106,.07)}
+.opname{font-family:'Playfair Display',serif;font-weight:600;color:var(--dark)}
+.tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10.5px;font-weight:600;color:#fff;font-family:'Lora',serif}
+.ts{background:var(--acc1)}.tn{background:var(--red)}.ta{background:var(--acc2)}
 
-/* ── CHEATSHEET ── */
-.ops-table { width: 100%; border-collapse: collapse; border-radius: var(--r); overflow: hidden; font-size: 13px; }
-.ops-table thead tr { background: var(--panel); }
-.ops-table th { padding: 10px 12px; text-align: left; font-family: 'Lora', serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid); font-weight: 600; }
-.ops-table td { padding: 9px 12px; border-bottom: 1px solid var(--div); }
-.ops-table tr:nth-child(even) td { background: var(--bg2); }
-.ops-table tr:hover td { background: rgba(176,123,106,0.07); }
-.ops-table .op-name { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--dark); }
-.tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--white);
-  font-family: 'Lora', serif;
-}
-.tag-sov { background: var(--acc1); }
-.tag-nem { background: var(--red-d); }
-.tag-all { background: var(--acc2); }
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.terms{display:flex;flex-direction:column;gap:9px}
+.trow{border-bottom:1px solid var(--div);padding-bottom:7px}
+.tword{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--acc1)}
+.tdef{font-size:13px;color:var(--mid);margin-top:2px;line-height:1.55}
+.facts{display:flex;flex-direction:column;gap:7px}
+.fact{display:flex;align-items:flex-start;gap:9px;background:var(--bg2);border-radius:4px;padding:7px 11px;font-size:13px;color:var(--dark)}
+.fact .st{color:var(--gold);flex-shrink:0}
 
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-.terms-list { display: flex; flex-direction: column; gap: 10px; }
-.term-row { border-bottom: 1px solid var(--div); padding-bottom: 8px; }
-.term-word { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--acc1); }
-.term-def { font-size: 13px; color: var(--mid); margin-top: 2px; }
+/* FOOTER */
+footer{background:var(--dbkg);border-top:2px solid var(--acc1);text-align:center;padding:26px 20px;margin-top:54px;color:var(--lite);font-size:13px;font-style:italic}
 
-.facts-list { display: flex; flex-direction: column; gap: 8px; }
-.fact-row {
-  display: flex; align-items: flex-start; gap: 10px;
-  background: var(--bg2); border-radius: 4px;
-  padding: 8px 12px; font-size: 13px; color: var(--dark);
-}
-.fact-row .star { color: var(--gold); flex-shrink: 0; }
-
-/* ── MINI SECTION TITLE ── */
-.mini-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dark);
-  margin: 22px 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--div);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.mini-title::before { content: ''; display: block; width: 4px; height: 16px; border-radius: 2px; background: var(--acc2); flex-shrink: 0; }
-
-/* ── FOOTER ── */
-footer {
-  background: var(--dbkg);
-  border-top: 2px solid var(--acc1);
-  text-align: center;
-  padding: 28px 20px;
-  margin-top: 60px;
-  color: var(--lite);
-  font-size: 13px;
-  font-style: italic;
-}
-
-/* ── RESPONSIVE ── */
-@media(max-width:700px){
-  .periods-grid, .battles-grid, .fronts-grid, .enemy-grid,
-  .commanders-grid, .others-grid, .reasons-grid, .stats-row,
-  .two-col { grid-template-columns: 1fr; }
-  .battle-card.full { grid-column: 1; }
-  .cover h1 { font-size: 32px; }
+/* RESPONSIVE */
+@media(max-width:680px){
+  .pgrid,.bgrid,.fgrid,.egrid,.cgrid,.ogrid,.tgrid,.rgrid,.stats,.twocol{grid-template-columns:1fr}
+  .bcard.full{grid-column:1}
+  .cover h1{font-size:30px}
+  nav a{padding:11px 9px;font-size:10.5px}
 }
 </style>
 </head>
 <body>
 
-<!-- COVER -->
+<!-- ══════════════ ОБЛОЖКА ══════════════ -->
 <div class="cover" id="top">
   <div class="cover-star">★</div>
-  <div class="cover-badge">История России · ЕГЭ · 2024–2025</div>
+  <div class="cover-badge">История России · ЕГЭ · Кодификатор ФИПИ</div>
   <h1>Великая<span>Отечественная</span>Война</h1>
   <div class="cover-years">
-    <div class="line"></div>
+    <div class="ln"></div>
     <span>1941 — 1945</span>
-    <div class="line"></div>
+    <div class="ln"></div>
   </div>
   <p class="cover-sub">Справочник для подготовки к ЕГЭ по истории</p>
   <div class="cover-toc">
@@ -510,12 +208,13 @@ footer {
     <a href="#battles"><span class="num">3</span>Важнейшие сражения и операции</a>
     <a href="#fronts"><span class="num">4</span>Фронты и командующие</a>
     <a href="#commanders"><span class="num">5</span>Полководцы и личности</a>
-    <a href="#victory"><span class="num">6</span>Причины победы и итоги</a>
-    <a href="#cheatsheet"><span class="num">7</span>Операции · Термины · Шпаргалка</a>
+    <a href="#home-front"><span class="num">6</span>Тыл, партизаны, оккупация, коалиция</a>
+    <a href="#victory"><span class="num">7</span>Причины победы и итоги войны</a>
+    <a href="#cheatsheet"><span class="num">8</span>Операции · Термины · Шпаргалка</a>
   </div>
 </div>
 
-<!-- NAV -->
+<!-- ══════════════ НАВИГАЦИЯ ══════════════ -->
 <nav>
   <span class="nav-brand">ВОВ · ЕГЭ</span>
   <a href="#chronology">Даты</a>
@@ -523,384 +222,345 @@ footer {
   <a href="#battles">Сражения</a>
   <a href="#fronts">Фронты</a>
   <a href="#commanders">Полководцы</a>
+  <a href="#home-front">Тыл</a>
   <a href="#victory">Победа</a>
   <a href="#cheatsheet">Шпаргалка</a>
 </nav>
 
 <main>
 
-<!-- 1. CHRONOLOGY -->
+<!-- ══════════════ 1. ХРОНОЛОГИЯ ══════════════ -->
 <section id="chronology">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(176,123,106,0.15);">📅</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(176,123,106,.14)">📅</div>
     <div>
       <h2 style="color:var(--acc1)">Хронология войны</h2>
-      <p>Ключевые даты из кодификатора ФИПИ — обязательны для ЕГЭ</p>
+      <p>Все ключевые даты по кодификатору ФИПИ — разделы 8.1, 8.2, 8.4</p>
     </div>
   </div>
   <div class="callout">
-    Кодификатор ФИПИ: раздел 1941–1945 — обязательный для знания период. Все даты ниже входят в ЕГЭ по истории. Обратите особое внимание на даты начала и завершения ключевых сражений.
+    Кодификатор ФИПИ (раздел 8): даты начала и окончания важнейших сражений, операций и конференций — обязательный материал для ЕГЭ. Особо запомните даты начала войны, коренного перелома и Дня Победы.
   </div>
-  <div class="dates-list">
-    <div class="date-row"><span class="date-badge">22 июня 1941</span><span class="date-text">Нападение Германии на СССР. Начало Великой Отечественной войны</span></div>
-    <div class="date-row"><span class="date-badge">23–29 июня 1941</span><span class="date-text">Приграничные сражения: оборона Брестской крепости, Белостокский котёл</span></div>
-    <div class="date-row"><span class="date-badge">10 июля – 10 сент. 1941</span><span class="date-text">Смоленское сражение — первая крупная оборонительная операция</span></div>
-    <div class="date-row"><span class="date-badge">8 сент. 1941</span><span class="date-text">Начало блокады Ленинграда (продолжалась 872 дня)</span></div>
-    <div class="date-row"><span class="date-badge">30 сент. 1941</span><span class="date-text">Начало операции «Тайфун» — немецкое наступление на Москву</span></div>
-    <div class="date-row"><span class="date-badge">5–6 дек. 1941</span><span class="date-text">Начало контрнаступления советских войск под Москвой</span></div>
-    <div class="date-row"><span class="date-badge">1 янв. 1942</span><span class="date-text">Декларация Объединённых Наций — оформление антигитлеровской коалиции</span></div>
-    <div class="date-row"><span class="date-badge">17 июля 1942</span><span class="date-text">Начало Сталинградской битвы</span></div>
-    <div class="date-row"><span class="date-badge">28 июля 1942</span><span class="date-text">Приказ № 227 «Ни шагу назад!» (И.В. Сталин)</span></div>
-    <div class="date-row"><span class="date-badge">19 нояб. 1942</span><span class="date-text">Начало операции «Уран» — окружение немцев под Сталинградом</span></div>
-    <div class="date-row"><span class="date-badge">12 янв. 1943</span><span class="date-text">Начало операции «Искра» — прорыв блокады Ленинграда</span></div>
-    <div class="date-row"><span class="date-badge">2 февр. 1943</span><span class="date-text">Капитуляция армии Паулюса. Завершение Сталинградской битвы</span></div>
-    <div class="date-row"><span class="date-badge">5 июля 1943</span><span class="date-text">Начало Курской битвы (операция «Цитадель»)</span></div>
-    <div class="date-row"><span class="date-badge">12 июля 1943</span><span class="date-text">Танковое сражение под Прохоровкой — крупнейшее в истории</span></div>
-    <div class="date-row"><span class="date-badge">23 авг. 1943</span><span class="date-text">Освобождение Харькова. Окончание Курской битвы</span></div>
-    <div class="date-row"><span class="date-badge">6 нояб. 1943</span><span class="date-text">Освобождение Киева</span></div>
-    <div class="date-row"><span class="date-badge">27 янв. 1944</span><span class="date-text">Полное снятие блокады Ленинграда</span></div>
-    <div class="date-row"><span class="date-badge">23 июня 1944</span><span class="date-text">Начало операции «Багратион» — освобождение Белоруссии</span></div>
-    <div class="date-row"><span class="date-badge">6 июня 1944</span><span class="date-text">Открытие второго фронта — высадка союзников в Нормандии (операция «Оверлорд»)</span></div>
-    <div class="date-row"><span class="date-badge">4–11 февр. 1945</span><span class="date-text">Ялтинская (Крымская) конференция «Большой тройки»</span></div>
-    <div class="date-row"><span class="date-badge">12 янв. 1945</span><span class="date-text">Начало Висло-Одерской операции — освобождение Польши</span></div>
-    <div class="date-row"><span class="date-badge">16 апр. 1945</span><span class="date-text">Начало Берлинской операции</span></div>
-    <div class="date-row"><span class="date-badge">25 апр. 1945</span><span class="date-text">Встреча советских и американских войск на Эльбе (Торгау)</span></div>
-    <div class="date-row"><span class="date-badge">30 апр. 1945</span><span class="date-text">Водружение Знамени Победы над Рейхстагом</span></div>
-    <div class="date-row"><span class="date-badge">8 мая 1945</span><span class="date-text">Подписание Акта о безоговорочной капитуляции Германии (Карлсхорст, Берлин)</span></div>
-    <div class="date-row"><span class="date-badge" style="background:var(--acc2)">9 мая 1945</span><span class="date-text" style="font-weight:600;color:var(--acc2)">День Победы в Великой Отечественной войне</span></div>
-    <div class="date-row"><span class="date-badge">8 авг. 1945</span><span class="date-text">СССР объявил войну Японии</span></div>
-    <div class="date-row"><span class="date-badge">2 сент. 1945</span><span class="date-text">Подписание Акта о капитуляции Японии. Окончание Второй мировой войны</span></div>
+  <div class="dates">
+    <div class="dr"><span class="dbadge">22 июня 1941</span><span class="dtext">Нападение Германии на СССР. Начало Великой Отечественной войны</span></div>
+    <div class="dr"><span class="dbadge">23–29 июня 1941</span><span class="dtext">Приграничные сражения: оборона Брестской крепости, Белостокский котёл, Минское сражение</span></div>
+    <div class="dr"><span class="dbadge">29 июня 1941</span><span class="dtext">Директива СНК СССР и ЦК ВКП(б) — призыв к организации партизанской борьбы в тылу врага</span></div>
+    <div class="dr"><span class="dbadge">10 июля – 10 сент. 1941</span><span class="dtext">Смоленское сражение — первая крупная оборонительная операция, задержавшая немецкое наступление на Москву</span></div>
+    <div class="dr"><span class="dbadge">8 авг. 1941</span><span class="dtext">И.В. Сталин назначен Верховным Главнокомандующим Вооружёнными силами СССР</span></div>
+    <div class="dr"><span class="dbadge">8 сент. 1941</span><span class="dtext">Начало блокады Ленинграда (продолжалась 872 дня)</span></div>
+    <div class="dr"><span class="dbadge">30 сент. 1941</span><span class="dtext">Начало операции «Тайфун» — немецкое наступление на Москву</span></div>
+    <div class="dr"><span class="dbadge">5–6 дек. 1941</span><span class="dtext">Начало контрнаступления советских войск под Москвой — первое крупное поражение Германии</span></div>
+    <div class="dr"><span class="dbadge">1 янв. 1942</span><span class="dtext">Декларация Объединённых Наций — оформление антигитлеровской коалиции (26 государств)</span></div>
+    <div class="dr"><span class="dbadge">18 янв. 1942</span><span class="dtext">Поставки по ленд-лизу через Иран (южный коридор) — начало массового снабжения СССР</span></div>
+    <div class="dr"><span class="dbadge">17 июля 1942</span><span class="dtext">Начало Сталинградской битвы (оборонительный этап)</span></div>
+    <div class="dr"><span class="dbadge">28 июля 1942</span><span class="dtext">Приказ № 227 «Ни шагу назад!» — И.В. Сталин. Введение заградительных отрядов</span></div>
+    <div class="dr"><span class="dbadge">19 нояб. 1942</span><span class="dtext">Начало операции «Уран» — окружение немецких войск под Сталинградом</span></div>
+    <div class="dr"><span class="dbadge">12 янв. 1943</span><span class="dtext">Начало операции «Искра» — прорыв блокады Ленинграда по суше</span></div>
+    <div class="dr"><span class="dbadge">2 февр. 1943</span><span class="dtext">Капитуляция армии Паулюса. Завершение Сталинградской битвы — начало коренного перелома</span></div>
+    <div class="dr"><span class="dbadge">5 авг. 1943</span><span class="dtext">Первый победный салют в Москве — в честь освобождения Орла и Белгорода</span></div>
+    <div class="dr"><span class="dbadge">5 июля 1943</span><span class="dtext">Начало Курской битвы (операция «Цитадель» — немецкое наступление)</span></div>
+    <div class="dr"><span class="dbadge">12 июля 1943</span><span class="dtext">Танковое сражение под Прохоровкой и Обоянью — крупнейшее в истории Второй мировой войны</span></div>
+    <div class="dr"><span class="dbadge">23 авг. 1943</span><span class="dtext">Освобождение Харькова. Окончание Курской битвы — завершение коренного перелома</span></div>
+    <div class="dr"><span class="dbadge">6 нояб. 1943</span><span class="dtext">Освобождение Киева — столицы Украины</span></div>
+    <div class="dr"><span class="dbadge">28 нояб. – 1 дек. 1943</span><span class="dtext">Тегеранская конференция «Большой тройки» (Сталин, Рузвельт, Черчилль) — решение об открытии второго фронта</span></div>
+    <div class="dr"><span class="dbadge">27 янв. 1944</span><span class="dtext">Полное снятие блокады Ленинграда — завершение 872-дневной осады</span></div>
+    <div class="dr"><span class="dbadge">6 июня 1944</span><span class="dtext">Открытие второго фронта — высадка союзников в Нормандии, операция «Оверлорд»</span></div>
+    <div class="dr"><span class="dbadge">23 июня 1944</span><span class="dtext">Начало операции «Багратион» — освобождение Белоруссии, одна из крупнейших операций войны</span></div>
+    <div class="dr"><span class="dbadge">4–11 февр. 1945</span><span class="dtext">Ялтинская (Крымская) конференция «Большой тройки» — решения о послевоенном устройстве мира</span></div>
+    <div class="dr"><span class="dbadge">12 янв. 1945</span><span class="dtext">Начало Висло-Одерской операции — освобождение Польши, выход к Одеру</span></div>
+    <div class="dr"><span class="dbadge">16 апр. 1945</span><span class="dtext">Начало Берлинской операции</span></div>
+    <div class="dr"><span class="dbadge">25 апр. 1945</span><span class="dtext">Встреча советских и американских войск на Эльбе (Торгау) — смычка двух фронтов</span></div>
+    <div class="dr"><span class="dbadge">30 апр. 1945</span><span class="dtext">Водружение Знамени Победы над Рейхстагом (М.А. Егоров, М.В. Кантария)</span></div>
+    <div class="dr highlight"><span class="dbadge green">8 мая 1945</span><span class="dtext" style="font-weight:600">Подписание Акта о безоговорочной капитуляции Германии (Карлсхорст, Берлин)</span></div>
+    <div class="dr highlight"><span class="dbadge green">9 мая 1945</span><span class="dtext" style="font-weight:700;color:var(--grn)">День Победы в Великой Отечественной войне</span></div>
+    <div class="dr"><span class="dbadge">17 июля – 2 авг. 1945</span><span class="dtext">Потсдамская конференция — решения о послевоенном устройстве Германии и Европы</span></div>
+    <div class="dr"><span class="dbadge">8 авг. 1945</span><span class="dtext">СССР объявил войну Японии, выполняя союзнические обязательства (Ялтинское соглашение)</span></div>
+    <div class="dr"><span class="dbadge">2 сент. 1945</span><span class="dtext">Подписание Акта о капитуляции Японии. Окончание Второй мировой войны</span></div>
   </div>
 </section>
 
-<!-- 2. PERIODS -->
+<!-- ══════════════ 2. ПЕРИОДЫ ══════════════ -->
 <section id="periods">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(139,158,139,0.15);">📊</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(139,158,139,.14)">📊</div>
     <div>
       <h2 style="color:var(--acc2)">Периоды и этапы войны</h2>
-      <p>Три главных периода по кодификатору ФИПИ</p>
+      <p>Три главных периода — разделы 8.1, 8.2, 8.4 кодификатора ФИПИ</p>
     </div>
   </div>
-  <div class="periods-grid">
-    <div class="period-card">
-      <div class="period-head" style="background:var(--acc1)">
-        I ПЕРИОД
-        <small>22.06.1941 – 18.11.1942</small>
-      </div>
-      <div class="period-body">
-        <strong>Начальный период войны.</strong> Стратегическая оборона. Тяжёлые поражения РККА. Битвы за Москву, Киев, Ленинград. Перестройка экономики на военный лад. Эвакуация заводов на восток.
-      </div>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="phead" style="background:var(--acc1)">I период — начальный<small>22 июня 1941 – 18 ноября 1942</small></div>
+      <div class="pbody"><strong>Стратегическая оборона.</strong> Тяжёлые поражения РККА. Потеря огромных территорий. Битвы за Москву, Киев, Ленинград. Перестройка экономики на военный лад. Эвакуация более 1500 заводов на восток страны. Формирование народного ополчения.</div>
     </div>
-    <div class="period-card">
-      <div class="period-head" style="background:var(--acc2)">
-        II ПЕРИОД
-        <small>19.11.1942 – 31.12.1943</small>
-      </div>
-      <div class="period-body">
-        <strong>Коренной перелом.</strong> Контрнаступление под Сталинградом. Курская битва. Стратегическая инициатива переходит к СССР. Освобождение Харькова и Киева.
-      </div>
+    <div class="pcard">
+      <div class="phead" style="background:var(--acc2)">II период — коренной перелом<small>19 ноября 1942 – 31 декабря 1943</small></div>
+      <div class="pbody"><strong>Переход стратегической инициативы к СССР.</strong> Контрнаступление под Сталинградом. Курская битва — окончательный перелом. Освобождение Харькова и Киева. СССР производит больше военной техники, чем Германия.</div>
     </div>
-    <div class="period-card">
-      <div class="period-head" style="background:var(--gold)">
-        III ПЕРИОД
-        <small>01.01.1944 – 09.05.1945</small>
-      </div>
-      <div class="period-body">
-        <strong>Освобождение СССР и Европы.</strong> Операция «Багратион». Снятие блокады Ленинграда. Берлинская операция. Капитуляция Германии. Полная победа.
-      </div>
+    <div class="pcard">
+      <div class="phead" style="background:var(--gold)">III период — освобождение<small>1 января 1944 – 9 мая 1945</small></div>
+      <div class="pbody"><strong>Освобождение СССР и Европы.</strong> Снятие блокады Ленинграда. Операция «Багратион». Открытие второго фронта союзниками (июнь 1944). Берлинская операция. Капитуляция Германии.</div>
     </div>
   </div>
 </section>
 
-<!-- 3. BATTLES -->
+<!-- ══════════════ 3. СРАЖЕНИЯ ══════════════ -->
 <section id="battles">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(139,58,58,0.12);">⚔️</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(139,58,58,.12)">⚔️</div>
     <div>
-      <h2 style="color:var(--red-d)">Важнейшие сражения</h2>
-      <p>Ключевые битвы, их командующие и историческое значение</p>
+      <h2 style="color:var(--red)">Важнейшие сражения</h2>
+      <p>Разделы 8.1, 8.2, 8.4 кодификатора — командующие, даты, итоги</p>
     </div>
   </div>
-  <div class="battles-grid">
-    <div class="battle-card">
-      <div class="battle-head" style="background:var(--acc1)">
-        Битва за Москву
-        <small>30 сент. 1941 – 20 апр. 1942</small>
-      </div>
-      <div class="battle-body">
-        <div class="battle-cmd">Г.К. Жуков, И.С. Конев, С.М. Будённый</div>
-        <div class="battle-divider"></div>
-        <div class="battle-result">Первое крупное поражение Германии. Развеян миф о непобедимости вермахта.</div>
-        <div class="battle-key">Операция «Тайфун» (нем.) провалилась. Морозы −35°C. Крах плана «молниеносной войны».</div>
+  <div class="bgrid">
+    <div class="bcard">
+      <div class="bhead" style="background:var(--acc1)">Битва за Москву <small>30 сент. 1941 – 20 апр. 1942</small></div>
+      <div class="bbody">
+        <div class="bcmd">Г.К. Жуков, И.С. Конев, С.М. Будённый, А.М. Василевский</div>
+        <div class="bdiv"></div>
+        <div class="bres">Первое крупное поражение Германии. Провал плана «молниеносной войны».</div>
+        <div class="bkey">Операция «Тайфун» (нем.) разгромлена. Морозы −35 °C. Контрнаступление советских войск началось 5–6 декабря 1941 г.</div>
       </div>
     </div>
-    <div class="battle-card">
-      <div class="battle-head" style="background:var(--acc2)">
-        Блокада Ленинграда
-        <small>8 сент. 1941 – 27 янв. 1944 (872 дня)</small>
-      </div>
-      <div class="battle-body">
-        <div class="battle-cmd">Л.А. Говоров, К.А. Мерецков</div>
-        <div class="battle-divider"></div>
-        <div class="battle-result">Город не сдался, несмотря на огромные потери. Опер. «Искра» (янв. 1943) — прорыв блокады.</div>
-        <div class="battle-key">Дорога жизни — связь через Ладогу. Погибло ~800 тыс. мирных жителей.</div>
+    <div class="bcard">
+      <div class="bhead" style="background:var(--acc2)">Блокада Ленинграда <small>8 сент. 1941 – 27 янв. 1944 (872 дня)</small></div>
+      <div class="bbody">
+        <div class="bcmd">Л.А. Говоров, К.А. Мерецков</div>
+        <div class="bdiv"></div>
+        <div class="bres">Город не сдался, несмотря на колоссальные потери. Операция «Искра» (янв. 1943) — прорыв блокады.</div>
+        <div class="bkey">Дорога жизни — единственная связь через Ладогу. Погибло около 800 тысяч мирных жителей. Полное снятие блокады — 27 января 1944 г.</div>
       </div>
     </div>
-    <div class="battle-card">
-      <div class="battle-head" style="background:var(--red-d)">
-        Сталинградская битва
-        <small>17 июля 1942 – 2 февр. 1943</small>
-      </div>
-      <div class="battle-body">
-        <div class="battle-cmd">В.И. Чуйков, А.И. Ерёменко, К.К. Рокоссовский</div>
-        <div class="battle-divider"></div>
-        <div class="battle-result">Коренной перелом. 6-я армия Паулюса окружена и капитулировала. 91 тыс. пленных.</div>
-        <div class="battle-key">Операция «Уран» (19.11.1942) — окружение. Приказ № 227 «Ни шагу назад!». Снайпер В. Зайцев.</div>
+    <div class="bcard">
+      <div class="bhead" style="background:var(--red)">Сталинградская битва <small>17 июля 1942 – 2 февр. 1943</small></div>
+      <div class="bbody">
+        <div class="bcmd">В.И. Чуйков (62-я армия), А.И. Ерёменко, К.К. Рокоссовский</div>
+        <div class="bdiv"></div>
+        <div class="bres">Начало коренного перелома. 6-я армия Паулюса окружена и капитулировала. Около 91 тыс. пленных.</div>
+        <div class="bkey">Операция «Уран» (19.11.1942) — окружение. Операция «Кольцо» (10.01.1943) — ликвидация котла. Приказ № 227 «Ни шагу назад!». Снайпер В.Г. Зайцев.</div>
       </div>
     </div>
-    <div class="battle-card">
-      <div class="battle-head" style="background:var(--gold)">
-        Курская битва
-        <small>5 июля – 23 авг. 1943</small>
-      </div>
-      <div class="battle-body">
-        <div class="battle-cmd">Г.К. Жуков, А.М. Василевский, К.К. Рокоссовский, Н.Ф. Ватутин</div>
-        <div class="battle-divider"></div>
-        <div class="battle-result">Окончательный коренной перелом. СССР перехватил стратегическую инициативу навсегда.</div>
-        <div class="battle-key">Операция «Цитадель» разгромлена. Прохоровка (12 июля) — крупнейшее танковое сражение. Освобождение Орла, Белгорода, Харькова.</div>
+    <div class="bcard">
+      <div class="bhead" style="background:var(--gold)">Курская битва <small>5 июля – 23 авг. 1943</small></div>
+      <div class="bbody">
+        <div class="bcmd">Г.К. Жуков, А.М. Василевский, К.К. Рокоссовский, Н.Ф. Ватутин</div>
+        <div class="bdiv"></div>
+        <div class="bres">Окончательный коренной перелом. СССР перехватил стратегическую инициативу навсегда.</div>
+        <div class="bkey">Операция «Цитадель» (нем.) разгромлена. Прохоровка и Обоянь (12 июля) — крупнейшее танковое сражение. Освобождение Орла, Белгорода, Харькова.</div>
       </div>
     </div>
-    <div class="battle-card full">
-      <div class="battle-head" style="background:var(--acc2)">
-        Берлинская операция
-        <small>16 апр. – 2 мая 1945</small>
-      </div>
-      <div class="battle-body" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="bcard full">
+      <div class="bhead" style="background:var(--acc2)">Берлинская операция <small>16 апр. – 2 мая 1945</small></div>
+      <div class="bbody" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div>
-          <div class="battle-cmd">Г.К. Жуков, И.С. Конев, К.К. Рокоссовский</div>
-          <div class="battle-divider"></div>
-          <div class="battle-result">Взятие Берлина. Знамя Победы над Рейхстагом 30 апреля 1945 г.</div>
+          <div class="bcmd">Г.К. Жуков (1-й Белорусский), И.С. Конев (1-й Украинский), К.К. Рокоссовский (2-й Белорусский)</div>
+          <div class="bdiv"></div>
+          <div class="bres">Взятие Берлина. Водружение Знамени Победы над Рейхстагом 30 апреля 1945 г.</div>
         </div>
-        <div>
-          <div class="battle-key">Зееловские высоты — ключевой рубеж обороны. Встреча на Эльбе с союзниками (25 апр.). Капитуляция Германии 8 мая 1945 г.</div>
-        </div>
+        <div class="bkey" style="padding-top:2px">Зееловские высоты — ключевой рубеж немецкой обороны. Встреча с союзниками на Эльбе (25 апр.). Самоубийство Гитлера (30 апр.). Капитуляция гарнизона Берлина 2 мая 1945 г.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. FRONTS -->
+<!-- ══════════════ 4. ФРОНТЫ ══════════════ -->
 <section id="fronts">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(74,107,74,0.12);">🗺️</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(74,107,74,.12)">🗺️</div>
     <div>
-      <h2 style="color:var(--grn-d)">Фронты и командующие</h2>
+      <h2 style="color:var(--grn)">Фронты и командующие</h2>
       <p>Советские фронты и германские группы армий</p>
     </div>
   </div>
-  <div class="mini-title" style="--acc2:var(--grn-d)">Советские фронты 1941–1945</div>
-  <div class="fronts-grid">
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Западный фронт</div><div class="front-cmd">Г.К. Жуков / И.С. Конев</div><div class="front-ops">Битва за Москву (оборона и контрнаступление 1941–1942)</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Сталинградский фронт</div><div class="front-cmd">А.И. Ерёменко</div><div class="front-ops">Оборона Сталинграда, операция «Уран» 1942</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Донской фронт</div><div class="front-cmd">К.К. Рокоссовский</div><div class="front-ops">Ликвидация окружённой группировки Паулюса 1943</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Центральный фронт</div><div class="front-cmd">К.К. Рокоссовский</div><div class="front-ops">Северный фас Курской дуги (операция «Цитадель»)</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Воронежский фронт</div><div class="front-cmd">Н.Ф. Ватутин</div><div class="front-ops">Южный фас Курской дуги, Прохоровка 1943</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Ленинградский фронт</div><div class="front-cmd">Л.А. Говоров</div><div class="front-ops">Оборона и деблокада Ленинграда, операция «Искра» 1943</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">Волховский фронт</div><div class="front-cmd">К.А. Мерецков</div><div class="front-ops">Прорыв блокады Ленинграда, операция «Искра»</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">1-й Белорусский фронт</div><div class="front-cmd">Г.К. Жуков</div><div class="front-ops">Операция «Багратион» 1944, Берлинская операция 1945</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">2-й Белорусский фронт</div><div class="front-cmd">К.К. Рокоссовский</div><div class="front-ops">Операция «Багратион», Восточно-Прусская операция</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">1-й Украинский фронт</div><div class="front-cmd">И.С. Конев</div><div class="front-ops">Висло-Одерская, Берлинская операции 1945</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">2-й Украинский фронт</div><div class="front-cmd">Р.Я. Малиновский</div><div class="front-ops">Ясско-Кишинёвская операция, освобождение Румынии 1944</div></div></div>
-    <div class="front-row"><div class="front-accent" style="background:var(--grn-d)"></div><div class="front-body"><div class="front-name">3-й Белорусский фронт</div><div class="front-cmd">И.Д. Черняховский / А.М. Василевский</div><div class="front-ops">Восточно-Прусская операция, взятие Кёнигсберга</div></div></div>
+  <div class="mt" style="--acc2:var(--grn)">Советские фронты 1941–1945</div>
+  <div class="fgrid">
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Западный фронт</div><div class="fcmd">Г.К. Жуков / И.С. Конев</div><div class="fops">Битва за Москву (оборона и контрнаступление 1941–1942)</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Сталинградский фронт</div><div class="fcmd">А.И. Ерёменко</div><div class="fops">Оборона Сталинграда, операция «Уран» 1942</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Донской фронт</div><div class="fcmd">К.К. Рокоссовский</div><div class="fops">Ликвидация окружённой группировки Паулюса (операция «Кольцо») 1943</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Центральный фронт</div><div class="fcmd">К.К. Рокоссовский</div><div class="fops">Северный фас Курской дуги, операция «Цитадель» 1943</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Воронежский фронт</div><div class="fcmd">Н.Ф. Ватутин</div><div class="fops">Южный фас Курской дуги, сражения под Прохоровкой и Обоянью 1943</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Ленинградский фронт</div><div class="fcmd">Л.А. Говоров</div><div class="fops">Оборона и деблокада Ленинграда, операция «Искра» 1943, полное снятие блокады 1944</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">Волховский фронт</div><div class="fcmd">К.А. Мерецков</div><div class="fops">Прорыв блокады Ленинграда, операция «Искра» (совместно с Ленинградским фронтом)</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">1-й Белорусский фронт</div><div class="fcmd">Г.К. Жуков</div><div class="fops">Операция «Багратион» 1944, Висло-Одерская операция, Берлинская операция 1945</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">2-й Белорусский фронт</div><div class="fcmd">К.К. Рокоссовский</div><div class="fops">Операция «Багратион», Восточно-Прусская операция 1945</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">1-й Украинский фронт</div><div class="fcmd">И.С. Конев</div><div class="fops">Висло-Одерская и Берлинская операции 1945</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">2-й Украинский фронт</div><div class="fcmd">Р.Я. Малиновский</div><div class="fops">Ясско-Кишинёвская операция, освобождение Румынии и Венгрии 1944</div></div></div>
+    <div class="frow"><div class="facc" style="background:var(--grn)"></div><div class="fbody"><div class="fname">3-й Белорусский фронт</div><div class="fcmd">И.Д. Черняховский / А.М. Василевский</div><div class="fops">Восточно-Прусская операция, взятие Кёнигсберга 1945</div></div></div>
   </div>
-  <div class="mini-title" style="margin-top:32px">Германские группы армий (1941)</div>
-  <div class="enemy-grid">
-    <div class="enemy-card">
-      <div class="enemy-head" style="background:var(--acc1)">Группа армий «Север»</div>
-      <div class="enemy-body">
-        <div class="enemy-cmd">Командующий: В. фон Лееб</div>
-        <div class="enemy-ops">Наступление на Ленинград через Прибалтику</div>
-      </div>
-    </div>
-    <div class="enemy-card">
-      <div class="enemy-head" style="background:var(--red-d)">Группа армий «Центр»</div>
-      <div class="enemy-body">
-        <div class="enemy-cmd">Командующий: Ф. фон Бок</div>
-        <div class="enemy-ops">Главный удар: Минск → Смоленск → Москва (операция «Тайфун»)</div>
-      </div>
-    </div>
-    <div class="enemy-card">
-      <div class="enemy-head" style="background:var(--gold)">Группа армий «Юг»</div>
-      <div class="enemy-body">
-        <div class="enemy-cmd">Командующий: Г. фон Рундштедт</div>
-        <div class="enemy-ops">Наступление на Киев, Харьков, Ростов-на-Дону, Сталинград</div>
-      </div>
-    </div>
+  <div class="mt" style="margin-top:30px">Германские группы армий (план «Барбаросса», 1941)</div>
+  <div class="egrid">
+    <div class="ecard"><div class="ehead" style="background:var(--acc1)">Группа армий «Север»</div><div class="ebody"><div class="ecmd">Командующий: В. фон Лееб</div><div class="eops">Наступление через Прибалтику на Ленинград</div></div></div>
+    <div class="ecard"><div class="ehead" style="background:var(--red)">Группа армий «Центр»</div><div class="ebody"><div class="ecmd">Командующий: Ф. фон Бок</div><div class="eops">Главный удар: Минск → Смоленск → Москва. Операция «Тайфун»</div></div></div>
+    <div class="ecard"><div class="ehead" style="background:var(--gold)">Группа армий «Юг»</div><div class="ebody"><div class="ecmd">Командующий: Г. фон Рундштедт</div><div class="eops">Наступление на Киев, Харьков, Ростов-на-Дону, Сталинград</div></div></div>
   </div>
 </section>
 
-<!-- 5. COMMANDERS -->
+<!-- ══════════════ 5. ПОЛКОВОДЦЫ ══════════════ -->
 <section id="commanders">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(201,169,138,0.2);">🎖️</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(201,169,138,.2)">🎖️</div>
     <div>
       <h2 style="color:var(--gold)">Полководцы и личности</h2>
-      <p>Советские маршалы и военачальники — обязательно для ЕГЭ</p>
+      <p>Советские маршалы и военачальники — раздел 8 кодификатора ФИПИ</p>
     </div>
   </div>
-  <div class="commanders-grid">
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>Г.К. Жуков</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Битва за Москву, Сталинград (координация), Курск, Берлин. Заместитель Верховного главнокомандующего. Принял капитуляцию Германии 8 мая 1945 г.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>К.К. Рокоссовский</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Сталинград (Донской фронт), Курская дуга (Центральный фронт), операция «Багратион», 2-й Белорусский фронт. Единственный дважды Маршал СССР и Польши.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>А.М. Василевский</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Начальник Генерального штаба. Координировал Сталинградскую битву и Курскую. Командовал в Восточной Пруссии. Руководил войсками на Дальнем Востоке против Японии.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>И.С. Конев</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Воронежский фронт (Курск), 1-й Украинский фронт. Висло-Одерская операция. Вместе с Жуковым — Берлинская операция 1945 г.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>Л.А. Говоров</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Командующий Ленинградским фронтом. Координировал прорыв блокады (операция «Искра», янв. 1943). Полное снятие блокады — январь 1944 г.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>К.А. Мерецков</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Волховский фронт. Прорыв блокады Ленинграда (совместно с Говоровым). Командовал войсками на Дальнем Востоке против Японии 1945 г.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>Н.Ф. Ватутин</h3><small>Генерал армии</small></div>
-      </div>
-      <div class="cmd-body">1-й Украинский фронт. Воронежский фронт. Операция «Уран», Курская битва (Прохоровка). Погиб в феврале 1944 года от ранения.</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-head" style="background:var(--gold)">
-        <div><h3>В.И. Чуйков</h3><small>Маршал Советского Союза</small></div>
-      </div>
-      <div class="cmd-body">Командующий 62-й армией (Сталинград). Держал город в самые тяжёлые дни уличных боёв. Участник Берлинской операции 1945 г.</div>
-    </div>
+  <div class="cgrid">
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>Г.К. Жуков</h3><small>Маршал Советского Союза, дважды Герой</small></div><div class="cbody">Битва за Москву, Сталинград (координация), Курская битва, Берлинская операция. Заместитель Верховного главнокомандующего. Принял капитуляцию Германии 8 мая 1945 г.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>К.К. Рокоссовский</h3><small>Маршал Советского Союза</small></div><div class="cbody">Сталинград (Донской фронт), Курская дуга (Центральный фронт), операция «Багратион», 2-й Белорусский фронт. Единственный в истории дважды Маршал — СССР и Польши.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>А.М. Василевский</h3><small>Маршал Советского Союза</small></div><div class="cbody">Начальник Генерального штаба (1942–1945). Координировал Сталинградскую и Курскую битвы. Командовал в Восточной Пруссии. Руководил войсками на Дальнем Востоке против Японии.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>И.С. Конев</h3><small>Маршал Советского Союза</small></div><div class="cbody">Воронежский фронт (Курская битва), 1-й Украинский фронт. Висло-Одерская операция. Вместе с Жуковым — Берлинская операция 1945 г.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>Л.А. Говоров</h3><small>Маршал Советского Союза</small></div><div class="cbody">Командующий Ленинградским фронтом. Координировал прорыв блокады (операция «Искра», янв. 1943). Полное снятие блокады — январь 1944 г.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>К.А. Мерецков</h3><small>Маршал Советского Союза</small></div><div class="cbody">Волховский фронт. Прорыв блокады Ленинграда совместно с Говоровым (операция «Искра»). Командовал советскими войсками на Дальнем Востоке в 1945 г.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>Н.Ф. Ватутин</h3><small>Генерал армии</small></div><div class="cbody">Воронежский и 1-й Украинский фронты. Операция «Уран», Курская битва (сражение под Прохоровкой). Смертельно ранен в феврале 1944 г.</div></div>
+    <div class="ccard"><div class="chead" style="background:var(--gold)"><h3>В.И. Чуйков</h3><small>Маршал Советского Союза</small></div><div class="cbody">Командующий 62-й армией в Сталинграде. Держал город в самые тяжёлые дни уличных боёв. Участник Берлинской операции 1945 г.</div></div>
   </div>
-  <div class="mini-title" style="margin-top:30px">Другие важные личности</div>
-  <div class="others-grid">
-    <div class="other-card"><div class="other-name">И.В. Сталин</div><div class="other-bio">Верховный Главнокомандующий, Председатель ГКО. Руководство страной и армией. Участник конференций в Тегеране, Ялте, Потсдаме.</div></div>
-    <div class="other-card"><div class="other-name">Б.М. Шапошников</div><div class="other-bio">Начальник Генерального штаба (1941–1942). Разработка оборонительных планов 1941 г. Выдающийся военный теоретик.</div></div>
-    <div class="other-card"><div class="other-name">С.К. Тимошенко</div><div class="other-bio">Нарком обороны в начале войны. Командовал фронтами в 1941–1942 гг. Маршал Советского Союза.</div></div>
-    <div class="other-card"><div class="other-name">А.И. Ерёменко</div><div class="other-bio">Командующий Сталинградским фронтом. Оборона Сталинграда (июль–ноябрь 1942). Маршал Советского Союза.</div></div>
-    <div class="other-card"><div class="other-name">А.В. Горбатов</div><div class="other-bio">3-я армия. Операция «Багратион», взятие Берлина. Генерал армии.</div></div>
-    <div class="other-card"><div class="other-name">И.Д. Черняховский</div><div class="other-bio">Самый молодой командующий фронтом. 3-й Белорусский. Погиб 18 февраля 1945 г. Генерал армии.</div></div>
+  <div class="mt" style="margin-top:28px">Другие важные личности</div>
+  <div class="ogrid">
+    <div class="ocard"><div class="oname">И.В. Сталин</div><div class="obio">Верховный Главнокомандующий (с 8 авг. 1941), Председатель ГКО. Руководил страной и армией. Участник Тегеранской, Ялтинской, Потсдамской конференций.</div></div>
+    <div class="ocard"><div class="oname">Б.М. Шапошников</div><div class="obio">Начальник Генерального штаба (1941–1942). Разработал первые оборонительные планы. Маршал Советского Союза. Выдающийся военный теоретик.</div></div>
+    <div class="ocard"><div class="oname">С.К. Тимошенко</div><div class="obio">Нарком обороны в начале войны. Командовал рядом фронтов в 1941–1942 гг. Маршал Советского Союза.</div></div>
+    <div class="ocard"><div class="oname">А.И. Ерёменко</div><div class="obio">Командующий Сталинградским фронтом. Руководил обороной Сталинграда июль–ноябрь 1942 г. Маршал Советского Союза.</div></div>
+    <div class="ocard"><div class="oname">И.Д. Черняховский</div><div class="obio">Самый молодой командующий фронтом. 3-й Белорусский фронт. Погиб 18 февраля 1945 г. Генерал армии, дважды Герой Советского Союза.</div></div>
+    <div class="ocard"><div class="oname">А.В. Горбатов</div><div class="obio">3-я армия, операция «Багратион», взятие Берлина. Генерал армии, Герой Советского Союза.</div></div>
   </div>
 </section>
 
-<!-- 6. VICTORY -->
-<section id="victory">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(139,158,139,0.15);">🏆</div>
+<!-- ══════════════ 6. ТЫЛ, ПАРТИЗАНЫ, ОККУПАЦИЯ ══════════════ -->
+<section id="home-front">
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(176,123,106,.14)">🏭</div>
     <div>
-      <h2 style="color:var(--acc2)">Причины победы и итоги</h2>
-      <p>По кодификатору: уметь называть ≥3 причин с конкретными примерами</p>
+      <h2 style="color:var(--acc1)">Тыл · Партизаны · Оккупация · Коалиция</h2>
+      <p>Раздел 8.3 кодификатора ФИПИ — «Человек и война: единство фронта и тыла»</p>
     </div>
   </div>
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num">~27 млн</div><div class="stat-lbl">Потери СССР за годы войны</div></div>
-    <div class="stat-card"><div class="stat-num">1 418</div><div class="stat-lbl">Дней длилась война</div></div>
-    <div class="stat-card"><div class="stat-num">1 500+</div><div class="stat-lbl">Заводов эвакуировано на восток</div></div>
-    <div class="stat-card"><div class="stat-num">11 млн км²</div><div class="stat-lbl">Территория освобождённых стран</div></div>
+  <div class="callout">
+    По кодификатору ФИПИ (раздел 8.3): трудовой подвиг тыла, партизанское движение, оккупационный режим, антигитлеровская коалиция — обязательные темы ЕГЭ. Необходимо уметь объяснять роль каждого из этих факторов в победе.
   </div>
-  <div class="reasons-grid">
-    <div class="reason-card"><div class="reason-title">1. Патриотизм и массовый героизм</div><div class="reason-text">Самопожертвование миллионов советских людей — на фронте и в тылу. 28 панфиловцев, Александр Матросов, Зоя Космодемьянская, Николай Гастелло.</div></div>
-    <div class="reason-card"><div class="reason-title">2. Эффективное военное командование</div><div class="reason-text">Выдвижение талантливых полководцев (Жуков, Рокоссовский, Василевский, Конев). Совершенствование тактики и оперативного искусства по ходу войны.</div></div>
-    <div class="reason-card"><div class="reason-title">3. Мобилизация экономики и тыла</div><div class="reason-text">Эвакуация на восток 1500+ заводов. Перестройка промышленности. «Всё для фронта, всё для победы». В 1944 г. СССР производил больше техники, чем Германия.</div></div>
-    <div class="reason-card"><div class="reason-title">4. Антигитлеровская коалиция и ленд-лиз</div><div class="reason-text">США, Великобритания — поставки продовольствия, техники, вооружений. Открытие второго фронта в Нормандии (июнь 1944 г.).</div></div>
-    <div class="reason-card"><div class="reason-title">5. Народный характер войны</div><div class="reason-text">Партизанское движение в тылу врага. Вклад советского тыла. Подвиг мирного населения. Блокада Ленинграда — символ беспримерной стойкости.</div></div>
-    <div class="reason-card"><div class="reason-title">6. Превосходство советской военной доктрины</div><div class="reason-text">Новые методы операций: концентрированные удары, окружение противника. Опыт, полученный в 1941–1942 гг., превратился в стратегическое мастерство.</div></div>
+  <div class="tgrid">
+    <div class="tcard" style="border-left-color:var(--acc2)">
+      <div class="ttitle">Трудовой подвиг тыла</div>
+      <div class="ttext">«Всё для фронта, всё для победы!» — главный лозунг. За 1941–1942 гг. эвакуировано свыше 1500 заводов на Урал, в Сибирь и Среднюю Азию. К 1944 г. советская промышленность производила больше военной техники, чем Германия. Значительную роль в производстве сыграли женщины и подростки.</div>
+    </div>
+    <div class="tcard" style="border-left-color:var(--gold)">
+      <div class="ttitle">Партизанское движение</div>
+      <div class="ttext">Директива СНК и ЦК ВКП(б) от 29 июня 1941 г. призывала к организации партизанской борьбы. В 1942 г. создан Центральный штаб партизанского движения (П.К. Пономаренко). Более 6000 отрядов, свыше 1,1 млн партизан. Рельсовая война — операции по уничтожению железнодорожных коммуникаций врага.</div>
+    </div>
+    <div class="tcard" style="border-left-color:var(--red)">
+      <div class="ttitle">Нацистский оккупационный режим</div>
+      <div class="ttext">«Генеральный план Ост» — планы уничтожения и порабощения народов СССР. Холокост — систематическое уничтожение евреев. Лагеря смерти и массовые расстрелы мирного населения. Угон советских граждан на принудительные работы в Германию. Разграбление и уничтожение культурных ценностей.</div>
+    </div>
+    <div class="tcard" style="border-left-color:var(--acc2)">
+      <div class="ttitle">Антигитлеровская коалиция и ленд-лиз</div>
+      <div class="ttext">Декларация ООН (1 янв. 1942) — 26 государств против держав «Оси». Ленд-лиз (США): поставки автомобилей, продовольствия, металлов, самолётов, локомотивов. Тегеранская конференция (нояб.–дек. 1943) — решение об открытии второго фронта. Второй фронт открыт 6 июня 1944 г. (операция «Оверлорд», Нормандия).</div>
+    </div>
+    <div class="tcard" style="border-left-color:var(--mid)">
+      <div class="ttitle">Идеология и культура в годы войны</div>
+      <div class="ttext">Патриотическая литература: А. Твардовский («Василий Тёркин»), К. Симонов («Жди меня»). Киноискусство: фильм «Она защищает Родину». Плакаты: «Родина-мать зовёт!» (И. Тоидзе). Музыка: 7-я симфония Д. Шостаковича (исполнена в блокадном Ленинграде). Церковь поддерживала советскую власть и призывала к защите Отечества.</div>
+    </div>
+    <div class="tcard" style="border-left-color:var(--acc3)">
+      <div class="ttitle">Героизм советских людей</div>
+      <div class="ttext">Александр Матросов — закрыл своим телом амбразуру дзота (27 февр. 1943). Зоя Космодемьянская — первая женщина, удостоенная звания Героя Советского Союза посмертно. Николай Гастелло — направил горящий самолёт на колонну врага. 28 панфиловцев — оборона Москвы у разъезда Дубосеково (16 нояб. 1941).</div>
+    </div>
   </div>
-  <div class="mini-title" style="margin-top:28px">Итоги и значение победы</div>
-  <ul class="results">
-    <li>Разгром нацистской Германии и её союзников; освобождение народов Европы</li>
-    <li>Нюрнбергский процесс (20 нояб. 1945 – 1 окт. 1946): осуждение главных военных преступников</li>
-    <li>Создание ООН (1945) — новая система международной безопасности</li>
-    <li>СССР стал мировой сверхдержавой; начало «холодной войны»</li>
-    <li>Территориальные изменения: Кёнигсберг (Калининград), Курилы, Южный Сахалин — к СССР</li>
-    <li>Потсдамская система: разделение Германии, денацификация, демилитаризация</li>
+</section>
+
+<!-- ══════════════ 7. ПРИЧИНЫ ПОБЕДЫ ══════════════ -->
+<section id="victory">
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(139,158,139,.14)">🏆</div>
+    <div>
+      <h2 style="color:var(--acc2)">Причины победы и итоги войны</h2>
+      <p>Раздел 8.4 кодификатора: уметь называть ≥3 причин с конкретными примерами</p>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="snum">~27 млн</div><div class="slbl">Потери СССР за годы войны</div></div>
+    <div class="stat"><div class="snum">1 418</div><div class="slbl">Дней длилась война</div></div>
+    <div class="stat"><div class="snum">1 500+</div><div class="slbl">Заводов эвакуировано на восток</div></div>
+    <div class="stat"><div class="snum">11 млн км²</div><div class="slbl">Территория освобождённых стран</div></div>
+  </div>
+  <div class="rgrid">
+    <div class="rcard"><div class="rtitle">1. Патриотизм и массовый героизм</div><div class="rtext">Самопожертвование миллионов советских людей на фронте и в тылу. А. Матросов, Зоя Космодемьянская, Н. Гастелло, 28 панфиловцев, защитники Брестской крепости.</div></div>
+    <div class="rcard"><div class="rtitle">2. Эффективное военное командование</div><div class="rtext">Выдвижение талантливых полководцев — Жукова, Рокоссовского, Василевского, Конева. Совершенствование тактики и оперативного искусства. Умение учиться на ошибках 1941–1942 гг.</div></div>
+    <div class="rcard"><div class="rtitle">3. Мобилизация экономики и тыла</div><div class="rtext">Эвакуация 1500+ заводов на восток. «Всё для фронта, всё для победы!». К 1944 г. СССР производил больше военной техники, чем Германия. Героический труд женщин и подростков.</div></div>
+    <div class="rcard"><div class="rtitle">4. Антигитлеровская коалиция и ленд-лиз</div><div class="rtext">Поставки США и Великобритании — автомобили, продовольствие, металлы, самолёты. Открытие второго фронта в Нормандии (июнь 1944 г.) — распыление немецких сил.</div></div>
+    <div class="rcard"><div class="rtitle">5. Партизанское движение</div><div class="rtext">Более 6000 отрядов, свыше 1,1 млн партизан в тылу врага. Рельсовая война дезорганизовала снабжение немецких войск. Подрыв оккупационного режима.</div></div>
+    <div class="rcard"><div class="rtitle">6. Моральный дух и народный характер войны</div><div class="rtext">Война воспринималась как Отечественная — защита Родины, семьи и культуры. Мощная пропаганда и идеологическая мобилизация. Поддержка Русской православной церкви.</div></div>
+  </div>
+  <div class="mt" style="margin-top:26px">Итоги и международное значение победы</div>
+  <ul class="res">
+    <li>Разгром нацистской Германии и её союзников; освобождение народов Европы от фашистской оккупации</li>
+    <li>Нюрнбергский процесс (20 нояб. 1945 – 1 окт. 1946) — осуждение главных военных преступников, установление принципов международного права</li>
+    <li>Создание Организации Объединённых Наций (1945) — новая система международной безопасности</li>
+    <li>СССР стал мировой сверхдержавой; начало биполярного мира и «холодной войны»</li>
+    <li>Территориальные изменения: Кёнигсберг (Калининград), Курильские острова, Южный Сахалин — переданы СССР</li>
+    <li>Потсдамская система: разделение Германии на зоны оккупации, денацификация, демилитаризация, демократизация</li>
+    <li>День Победы — 9 мая 1945 г. — главный праздник и символ памяти народов бывшего СССР</li>
   </ul>
 </section>
 
-<!-- 7. CHEATSHEET -->
+<!-- ══════════════ 8. ШПАРГАЛКА ══════════════ -->
 <section id="cheatsheet">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(212,168,154,0.2);">📋</div>
+  <div class="s-head">
+    <div class="s-icon" style="background:rgba(212,168,154,.2)">📋</div>
     <div>
       <h2 style="color:var(--acc3)">Операции · Термины · Шпаргалка</h2>
-      <p>Всё самое важное в одном месте</p>
+      <p>Всё самое важное для быстрого повторения перед экзаменом</p>
     </div>
   </div>
-  <div class="mini-title">Важнейшие военные операции</div>
-  <table class="ops-table">
-    <thead>
-      <tr><th>Операция</th><th>Кто</th><th>Дата</th><th>Значение</th></tr>
-    </thead>
+  <div class="mt">Важнейшие военные операции</div>
+  <table class="otable">
+    <thead><tr><th>Операция</th><th>Кто</th><th>Дата</th><th>Значение</th></tr></thead>
     <tbody>
-      <tr><td class="op-name">«Барбаросса»</td><td><span class="tag tag-nem">Нем.</span></td><td>22.06.1941</td><td>Нападение Германии на СССР</td></tr>
-      <tr><td class="op-name">«Тайфун»</td><td><span class="tag tag-nem">Нем.</span></td><td>30.09.1941</td><td>Немецкое наступление на Москву — провалилось</td></tr>
-      <tr><td class="op-name">«Уран»</td><td><span class="tag tag-sov">Сов.</span></td><td>19.11.1942</td><td>Окружение армии Паулюса под Сталинградом</td></tr>
-      <tr><td class="op-name">«Кольцо»</td><td><span class="tag tag-sov">Сов.</span></td><td>10.01.1943</td><td>Ликвидация сталинградского котла</td></tr>
-      <tr><td class="op-name">«Искра»</td><td><span class="tag tag-sov">Сов.</span></td><td>12.01.1943</td><td>Прорыв блокады Ленинграда</td></tr>
-      <tr><td class="op-name">«Цитадель»</td><td><span class="tag tag-nem">Нем.</span></td><td>05.07.1943</td><td>Немецкое наступление на Курской дуге — разгромлено</td></tr>
-      <tr><td class="op-name">«Кутузов»</td><td><span class="tag tag-sov">Сов.</span></td><td>12.07.1943</td><td>Контрнаступление на Орловском направлении</td></tr>
-      <tr><td class="op-name">«Румянцев»</td><td><span class="tag tag-sov">Сов.</span></td><td>03.08.1943</td><td>Освобождение Белгорода и Харькова</td></tr>
-      <tr><td class="op-name">«Багратион»</td><td><span class="tag tag-sov">Сов.</span></td><td>23.06.1944</td><td>Освобождение Белоруссии — крупнейшая операция 1944 г.</td></tr>
-      <tr><td class="op-name">«Оверлорд»</td><td><span class="tag tag-all">Союзн.</span></td><td>06.06.1944</td><td>Высадка союзников в Нормандии — второй фронт</td></tr>
-      <tr><td class="op-name">Висло-Одерская</td><td><span class="tag tag-sov">Сов.</span></td><td>12.01.1945</td><td>Освобождение Польши, выход на Одер</td></tr>
-      <tr><td class="op-name">Берлинская</td><td><span class="tag tag-sov">Сов.</span></td><td>16.04.1945</td><td>Взятие Берлина, окончание войны в Европе</td></tr>
+      <tr><td class="opname">«Барбаросса»</td><td><span class="tag tn">Нем.</span></td><td>22.06.1941</td><td>Нападение Германии на СССР, начало ВОВ</td></tr>
+      <tr><td class="opname">«Тайфун»</td><td><span class="tag tn">Нем.</span></td><td>30.09.1941</td><td>Немецкое наступление на Москву — провалилось</td></tr>
+      <tr><td class="opname">«Уран»</td><td><span class="tag ts">Сов.</span></td><td>19.11.1942</td><td>Окружение армии Паулюса под Сталинградом</td></tr>
+      <tr><td class="opname">«Малый Сатурн»</td><td><span class="tag ts">Сов.</span></td><td>16.12.1942</td><td>Разгром итало-немецких войск на Среднем Дону</td></tr>
+      <tr><td class="opname">«Кольцо»</td><td><span class="tag ts">Сов.</span></td><td>10.01.1943</td><td>Ликвидация сталинградского котла, капитуляция Паулюса</td></tr>
+      <tr><td class="opname">«Искра»</td><td><span class="tag ts">Сов.</span></td><td>12.01.1943</td><td>Прорыв блокады Ленинграда</td></tr>
+      <tr><td class="opname">«Цитадель»</td><td><span class="tag tn">Нем.</span></td><td>05.07.1943</td><td>Немецкое наступление на Курской дуге — разгромлено</td></tr>
+      <tr><td class="opname">«Кутузов»</td><td><span class="tag ts">Сов.</span></td><td>12.07.1943</td><td>Контрнаступление на Орловском направлении</td></tr>
+      <tr><td class="opname">«Румянцев»</td><td><span class="tag ts">Сов.</span></td><td>03.08.1943</td><td>Освобождение Белгорода и Харькова</td></tr>
+      <tr><td class="opname">«Багратион»</td><td><span class="tag ts">Сов.</span></td><td>23.06.1944</td><td>Освобождение Белоруссии — крупнейшая операция 1944 г.</td></tr>
+      <tr><td class="opname">«Оверлорд»</td><td><span class="tag ta">Союзн.</span></td><td>06.06.1944</td><td>Высадка союзников в Нормандии — открытие второго фронта</td></tr>
+      <tr><td class="opname">Висло-Одерская</td><td><span class="tag ts">Сов.</span></td><td>12.01.1945</td><td>Освобождение Польши, выход к Одеру</td></tr>
+      <tr><td class="opname">Восточно-Прусская</td><td><span class="tag ts">Сов.</span></td><td>13.01.1945</td><td>Разгром немецкой группировки в Восточной Пруссии</td></tr>
+      <tr><td class="opname">Берлинская</td><td><span class="tag ts">Сов.</span></td><td>16.04.1945</td><td>Взятие Берлина, окончание войны в Европе</td></tr>
     </tbody>
   </table>
 
-  <div class="two-col">
+  <div class="twocol">
     <div>
-      <div class="mini-title">Ключевые термины</div>
-      <div class="terms-list">
-        <div class="term-row"><div class="term-word">ГКО</div><div class="term-def">Государственный Комитет Обороны — высший чрезвычайный орган власти СССР в годы войны</div></div>
-        <div class="term-row"><div class="term-word">РККА</div><div class="term-def">Рабоче-крестьянская Красная армия — наименование вооружённых сил СССР</div></div>
-        <div class="term-row"><div class="term-word">Вермахт</div><div class="term-def">Вооружённые силы нацистской Германии 1935–1946 гг.</div></div>
-        <div class="term-row"><div class="term-word">Ленд-лиз</div><div class="term-def">Программа помощи США союзникам — поставки техники, вооружений, продовольствия</div></div>
-        <div class="term-word">Коренной перелом</div><div class="term-def" style="margin-bottom:8px">Переход стратегической инициативы от Германии к СССР (Сталинград → Курск, 1942–1943)</div>
-        <div class="term-row"><div class="term-word">Блицкриг</div><div class="term-def">Тактика «молниеносной войны» — план быстрого разгрома СССР, провалился под Москвой</div></div>
-        <div class="term-row"><div class="term-word">«Второй фронт»</div><div class="term-def">Открыт союзниками в Нормандии 6 июня 1944 г. (операция «Оверлорд»)</div></div>
-        <div class="term-row"><div class="term-word">Дорога жизни</div><div class="term-def">Единственная коммуникация Ленинграда с Большой землёй через Ладожское озеро</div></div>
+      <div class="mt">Ключевые термины ЕГЭ</div>
+      <div class="terms">
+        <div class="trow"><div class="tword">ГКО</div><div class="tdef">Государственный Комитет Обороны — высший чрезвычайный орган власти СССР в годы войны (создан 30 июня 1941 г.)</div></div>
+        <div class="trow"><div class="tword">РККА</div><div class="tdef">Рабоче-крестьянская Красная армия — официальное наименование вооружённых сил СССР</div></div>
+        <div class="trow"><div class="tword">Вермахт</div><div class="tdef">Вооружённые силы нацистской Германии 1935–1946 гг.</div></div>
+        <div class="trow"><div class="tword">Ленд-лиз</div><div class="tdef">Программа помощи США союзникам — поставки техники, вооружений, продовольствия в долг или в аренду</div></div>
+        <div class="trow"><div class="tword">Блицкриг</div><div class="tdef">Тактика «молниеносной войны» — план быстрого разгрома СССР. Провалился под Москвой зимой 1941–1942 гг.</div></div>
+        <div class="trow"><div class="tword">Коренной перелом</div><div class="tdef">Переход стратегической инициативы от Германии к СССР. Начало — Сталинград (нояб. 1942), завершение — Курск (авг. 1943)</div></div>
+        <div class="trow"><div class="tword">Дорога жизни</div><div class="tdef">Единственная транспортная коммуникация Ленинграда с Большой землёй через Ладожское озеро в годы блокады</div></div>
+        <div class="trow"><div class="tword">Второй фронт</div><div class="tdef">Открыт союзниками в Нормандии 6 июня 1944 г. (операция «Оверлорд»). СССР требовал его открытия с 1941 г.</div></div>
+        <div class="trow"><div class="tword">«Большая тройка»</div><div class="tdef">Сталин, Рузвельт, Черчилль. Конференции: Тегеранская (1943), Ялтинская (1945), Потсдамская (1945)</div></div>
       </div>
     </div>
     <div>
-      <div class="mini-title">Факты — обязательно знать</div>
-      <div class="facts-list">
-        <div class="fact-row"><span class="star">★</span><span>Начало войны — 22 июня 1941 г. (воскресенье, 4:00 утра)</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Оборона Брестской крепости — с 22 июня по июль 1941 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Приказ № 227 «Ни шагу назад!» — 28 июля 1942 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Блокада Ленинграда — 872 дня (8 сент. 1941 – 27 янв. 1944)</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Операция «Уран» началась 19 ноября 1942 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Капитуляция Паулюса — 2 февраля 1943 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Прохоровка — 12 июля 1943 г. (крупнейшее танковое сражение)</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Знамя Победы над Рейхстагом — 30 апреля 1945 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>День Победы — 9 мая 1945 г.</span></div>
-        <div class="fact-row"><span class="star">★</span><span>Нюрнбергский процесс: 20 нояб. 1945 – 1 окт. 1946 г.</span></div>
+      <div class="mt">Факты — обязательно знать</div>
+      <div class="facts">
+        <div class="fact"><span class="st">★</span><span>Начало войны — 22 июня 1941 г., воскресенье, 4:00 утра</span></div>
+        <div class="fact"><span class="st">★</span><span>Оборона Брестской крепости — с 22 июня по июль 1941 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Приказ № 227 «Ни шагу назад!» — 28 июля 1942 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Блокада Ленинграда — 872 дня (8 сент. 1941 – 27 янв. 1944)</span></div>
+        <div class="fact"><span class="st">★</span><span>Операция «Уран» — 19 ноября 1942 г., начало окружения Паулюса</span></div>
+        <div class="fact"><span class="st">★</span><span>Капитуляция Паулюса — 2 февраля 1943 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Прохоровка — 12 июля 1943 г., крупнейшее танковое сражение</span></div>
+        <div class="fact"><span class="st">★</span><span>Тегеранская конференция — 28 ноября – 1 декабря 1943 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Снятие блокады Ленинграда — 27 января 1944 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Знамя Победы над Рейхстагом — 30 апреля 1945 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>День Победы — 9 мая 1945 г.</span></div>
+        <div class="fact"><span class="st">★</span><span>Нюрнбергский процесс — 20 нояб. 1945 – 1 окт. 1946 г.</span></div>
       </div>
     </div>
   </div>
@@ -909,30 +569,28 @@ footer {
 </main>
 
 <footer>
-  Справочник «Великая Отечественная война 1941–1945» · По материалам кодификатора ЕГЭ по истории (ФИПИ) · Подготовка к ЕГЭ
+  Справочник «Великая Отечественная война 1941–1945» · По материалам кодификатора ЕГЭ по истории ФИПИ · Разделы 8.1–8.4
 </footer>
 
 <script>
-// Active nav on scroll
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('nav a[href^="#"]');
-const observer = new IntersectionObserver(entries => {
+const navLinks  = document.querySelectorAll('nav a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting) {
+    if (e.isIntersecting) {
       navLinks.forEach(a => a.classList.remove('active'));
-      const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
-      if(link) link.classList.add('active');
+      const lnk = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (lnk) lnk.classList.add('active');
     }
   });
-}, { rootMargin: '-40% 0px -55% 0px' });
-sections.forEach(s => observer.observe(s));
+}, { rootMargin: '-35% 0px -60% 0px' });
+sections.forEach(s => obs.observe(s));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 </script>
